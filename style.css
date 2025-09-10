@@ -138,6 +138,7 @@ body {
 .history-item-actions { margin-top: 6px; display: flex; gap: 8px; }
 .history-item-actions .icon-btn { background: transparent; color: #c2185b; border: 1px dashed rgba(194,24,91,0.35); padding: 8px 10px; border-radius: 10px; font-size: 0.95rem; cursor: pointer; }
 .history-item-actions .icon-btn:hover { filter: none; box-shadow: 0 2px 10px rgba(214,51,132,0.18); }
+.history-item-actions .add-photo-file { display: none; }
   
   /* Câmera */
 .modal-content.camera { text-align: center; }
