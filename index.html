@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Operação Aliança 💍</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="background-hearts" aria-hidden="true"></div>
+  <header class="app-header">
+    <h1>🕵️‍♀️ Missão: Operação Aliança</h1>
+    <p>Uma trilha de missões românticas para chegar ao pedido perfeito 💖</p>
+  </header>
+
+  <div class="progress-wrapper" aria-label="Progresso das missões">
+    <div class="progress-bar">
+      <div class="progress-fill" id="progress-fill" style="width: 0%;"></div>
+    </div>
+    <span class="progress-text" id="progress-text">0/0</span>
+  </div>
+
+  <div class="container">
+    <div id="card-container"></div>
+
+    <div class="controls">
+      <button id="reset-btn" class="secondary">🔄 Recomeçar</button>
+    </div>
+
+    <section class="history" aria-labelledby="history-title">
+      <div class="history-header">
+        <h3 id="history-title">Histórico da noite</h3>
+        <button id="toggle-history" class="secondary" aria-label="Mostrar histórico">👁️</button>
+      </div>
+      <ul id="history-list" class="history-list" hidden></ul>
+    </section>
+  </div>
+
+  <div id="final-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="final-title" aria-describedby="final-desc" hidden>
+    <div class="modal-content">
+      <button class="modal-close" id="close-modal" aria-label="Fechar">×</button>
+      <h2 id="final-title">Quer namorar comigo? 💍</h2>
+      <p id="final-desc">Você concluiu todas as missões com maestria. Aceita viver novas aventuras comigo todos os dias?</p>
+      <div class="modal-actions">
+        <button id="answer-yes" class="primary">Sim! 💖</button>
+      </div>
+      <div class="celebration" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <div id="camera-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="camera-title" hidden>
+    <div class="modal-content camera">
+      <button class="modal-close" id="close-camera" aria-label="Fechar">×</button>
+      <h2 id="camera-title">Capturar foto 📷</h2>
+      <video id="camera-video" autoplay playsinline></video>
+      <canvas id="camera-canvas" hidden></canvas>
+      <div class="modal-actions">
+        <button id="switch-camera" class="secondary">Trocar câmera</button>
+        <button id="capture-photo" class="primary">Tirar foto</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="lightbox" class="modal" role="dialog" aria-modal="true" aria-labelledby="lightbox-title" hidden>
+    <div class="modal-content lightbox">
+      <button class="modal-close" id="close-lightbox" aria-label="Fechar">×</button>
+      <img id="lightbox-image" alt="Foto da missão" />
+      <div class="modal-actions">
+        <a id="download-image" class="primary" download="missao.jpg">Salvar imagem</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
