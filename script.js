@@ -139,7 +139,7 @@ const cardsData = [
       <div class="history-item-actions">
         <button class="icon-btn add-photo-file" aria-label="Adicionar foto da galeria">🖼️ Galeria</button>
         <button class="icon-btn add-photo-camera" aria-label="Abrir câmera">📷 Câmera</button>
-        <input type="file" accept="image/*" capture="environment" class="photo-input" hidden />
+        <input type="file" accept="image/*" class="photo-input" hidden />
       </div>
     `;
   
