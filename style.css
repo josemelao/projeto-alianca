@@ -162,6 +162,18 @@ body {
   
   .final-photo { width: 100%; max-width: 520px; height: auto; border-radius: 14px; box-shadow: 0 10px 24px rgba(0,0,0,0.12); margin-top: 12px; }
   
+  .final-actions { margin-top: 20px; display: flex; justify-content: center; }
+  .gallery-button { font-size: 1.1rem; padding: 16px 24px; }
+  
+  /* Galeria do casal */
+  .modal-content.gallery { max-width: 90vw; max-height: 90vh; overflow-y: auto; }
+  .gallery-subtitle { margin: 8px 0 20px 0; color: #7a5163; font-size: 1rem; }
+  .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 20px; }
+  .gallery-item { text-align: center; }
+  .gallery-item img { width: 100%; height: 200px; object-fit: cover; border-radius: 14px; box-shadow: 0 8px 20px rgba(0,0,0,0.12); transition: transform 200ms ease; }
+  .gallery-item img:hover { transform: scale(1.02); }
+  .gallery-caption { margin-top: 8px; font-size: 0.95rem; color: #7a5163; font-weight: 600; }
+  
   @media (max-width: 420px) { .container { padding: 16px; } .card { padding: 22px; } .progress-wrapper { padding: 0 16px 10px; } }
   @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
   

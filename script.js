@@ -1,3 +1,72 @@
+// Array com todas as fotos da galeria do casal
+const couplePhotos = [
+  {
+    src: "img/foto.jpg",
+    caption: "Nosso primeiro encontro oficial 💍",
+    alt: "Nosso momento especial"
+  },
+  {
+    src: "QR-Rebeca.png", 
+    caption: "Um código especial para você 💖",
+    alt: "QR Code especial"
+  },
+  {
+    src: "img/Imagem do WhatsApp de 2025-09-12 à(s) 13.57.02_523c6d10.jpg",
+    caption: "Momento especial juntos 💕",
+    alt: "Foto do casal"
+  },
+  {
+    src: "img/Imagem do WhatsApp de 2025-09-12 à(s) 13.57.02_f20a3ba1.jpg",
+    caption: "Nossa felicidade 💖",
+    alt: "Foto do casal"
+  },
+  {
+    src: "img/Imagem do WhatsApp de 2025-09-12 à(s) 13.57.03_466c0724.jpg",
+    caption: "Memórias inesquecíveis ✨",
+    alt: "Foto do casal"
+  },
+  {
+    src: "img/Imagem do WhatsApp de 2025-09-12 à(s) 13.57.03_e9d7c882.jpg",
+    caption: "Amor verdadeiro 💕",
+    alt: "Foto do casal"
+  },
+  {
+    src: "img/Imagem do WhatsApp de 2025-09-12 à(s) 13.57.03_f62fb3b2.jpg",
+    caption: "Juntos para sempre 💍",
+    alt: "Foto do casal"
+  },
+  {
+    src: "img/Imagem do WhatsApp de 2025-09-12 à(s) 13.57.04_19f43125.jpg",
+    caption: "Nosso sorriso 💖",
+    alt: "Foto do casal"
+  },
+  {
+    src: "img/Imagem do WhatsApp de 2025-09-12 à(s) 13.57.04_458c1635.jpg",
+    caption: "Momento perfeito ✨",
+    alt: "Foto do casal"
+  },
+  {
+    src: "img/Imagem do WhatsApp de 2025-09-12 à(s) 13.57.04_daa840e6.jpg",
+    caption: "Nossa história de amor 💕",
+    alt: "Foto do casal"
+  },
+  {
+    src: "img/Imagem do WhatsApp de 2025-09-12 à(s) 13.57.04_dee374b3.jpg",
+    caption: "Felicidade pura 💖",
+    alt: "Foto do casal"
+  },
+  {
+    src: "img/Imagem do WhatsApp de 2025-09-12 à(s) 13.57.05_11bf9a60.jpg",
+    caption: "Amor eterno 💍",
+    alt: "Foto do casal"
+  },
+  {
+    src: "img/Imagem do WhatsApp de 2025-09-12 à(s) 13.57.05_2f7c8514.jpg",
+    caption: "Nosso futuro juntos ✨",
+    alt: "Foto do casal"
+  }
+];
+
 const cardsData = [
     {
       title: "Icício",
@@ -320,9 +389,15 @@ const cardsData = [
       <div class="card">
         <h2>Agora é oficial! 💍</h2>
         <p class="description">Você é oficialmente minha namorada! Espero que você tenha gostado desse nosso date, fiz com muito carinho. Que essa seja a primeira de muitas aventuras juntos! 💖</p>
-        <img src="foto.jpg" alt="Nosso momento especial" class="final-photo" />
+        <img src="img/foto.jpg" alt="Nosso momento especial" class="final-photo" />
+        <div class="final-actions">
+          <button id="gallery-btn" class="primary gallery-button">💕 Nossa Galeria</button>
+        </div>
       </div>
     `;
+    
+    // Adicionar evento do botão da galeria
+    document.getElementById('gallery-btn').addEventListener('click', openCoupleGallery);
   }
   
   function spawnCelebrationHearts() {
@@ -337,6 +412,37 @@ const cardsData = [
       span.style.opacity = String(0.6 + Math.random()*0.4);
       area.appendChild(span);
     }
+  }
+
+  function openCoupleGallery() {
+    const galleryModal = document.getElementById('couple-gallery-modal');
+    const galleryGrid = galleryModal.querySelector('.gallery-grid');
+    
+    // Limpar galeria existente
+    galleryGrid.innerHTML = '';
+    
+    // Adicionar todas as fotos do array
+    couplePhotos.forEach(photo => {
+      const galleryItem = document.createElement('div');
+      galleryItem.className = 'gallery-item';
+      galleryItem.innerHTML = `
+        <img src="${photo.src}" alt="${photo.alt}" />
+        <p class="gallery-caption">${photo.caption}</p>
+      `;
+      
+      // Adicionar evento de clique para abrir no lightbox
+      const img = galleryItem.querySelector('img');
+      img.addEventListener('click', () => openLightbox(photo.src));
+      
+      galleryGrid.appendChild(galleryItem);
+    });
+    
+    galleryModal.hidden = false;
+  }
+
+  function closeCoupleGallery() {
+    const galleryModal = document.getElementById('couple-gallery-modal');
+    galleryModal.hidden = true;
   }
   
   function resetProgress() {
@@ -387,6 +493,16 @@ const cardsData = [
     closeLightboxBtn.addEventListener('click', closeLightbox);
     lightbox.addEventListener('click', (e) => {
       if (e.target === lightbox) closeLightbox();
+    });
+
+    // gallery events
+    document.getElementById('close-gallery').addEventListener('click', closeCoupleGallery);
+    document.getElementById('close-gallery-btn').addEventListener('click', closeCoupleGallery);
+    document.getElementById('couple-gallery-modal').addEventListener('click', (e) => {
+      if (e.target.id === 'couple-gallery-modal') closeCoupleGallery();
+    });
+    document.getElementById('add-photo-gallery').addEventListener('click', () => {
+      alert('Funcionalidade de adicionar foto será implementada em breve! 💕');
     });
   };
   
