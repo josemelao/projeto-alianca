@@ -78,13 +78,27 @@
     <div class="modal-content gallery">
       <button class="modal-close" id="close-gallery" aria-label="Fechar">×</button>
       <h2 id="gallery-title">💕 Nossa Galeria de Memórias</h2>
-      <p class="gallery-subtitle">Todas as fotos especiais que marcaram nossa história</p>
+      <p class="gallery-subtitle">Todas as fotos e vídeos especiais que marcaram nossa história</p>
       <div class="gallery-grid">
-        <!-- Fotos serão carregadas dinamicamente pelo JavaScript -->
+        <!-- Fotos e vídeos serão carregados dinamicamente pelo JavaScript -->
       </div>
       <div class="modal-actions">
         <button id="add-photo-gallery" class="secondary">📷 Adicionar Foto</button>
         <button id="close-gallery-btn" class="primary">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="video-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="video-title" hidden>
+    <div class="modal-content video">
+      <button class="modal-close" id="close-video" aria-label="Fechar">×</button>
+      <h2 id="video-title">🎬 Nosso Momento Especial</h2>
+      <video controls autoplay>
+        <source src="" type="video/mp4">
+        Seu navegador não suporta vídeos.
+      </video>
+      <div class="modal-actions">
+        <button id="close-video-btn" class="primary">Fechar</button>
       </div>
     </div>
   </div>

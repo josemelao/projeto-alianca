@@ -1,69 +1,82 @@
-// Array com todas as fotos da galeria do casal
+// Array com todas as fotos e vídeos da galeria do casal
 const couplePhotos = [
   {
     src: "img/foto.jpg",
     caption: "Nosso primeiro encontro oficial 💍",
-    alt: "Nosso momento especial"
-  },
-  {
-    src: "QR-Rebeca.png", 
-    caption: "Um código especial para você 💖",
-    alt: "QR Code especial"
+    alt: "Nosso momento especial",
+    type: "image"
   },
   {
     src: "img/Imagem do WhatsApp de 2025-09-12 à(s) 13.57.02_523c6d10.jpg",
     caption: "Momento especial juntos 💕",
-    alt: "Foto do casal"
+    alt: "Foto do casal",
+    type: "image"
   },
   {
     src: "img/Imagem do WhatsApp de 2025-09-12 à(s) 13.57.02_f20a3ba1.jpg",
     caption: "Nossa felicidade 💖",
-    alt: "Foto do casal"
+    alt: "Foto do casal",
+    type: "image"
   },
   {
     src: "img/Imagem do WhatsApp de 2025-09-12 à(s) 13.57.03_466c0724.jpg",
     caption: "Memórias inesquecíveis ✨",
-    alt: "Foto do casal"
+    alt: "Foto do casal",
+    type: "image"
   },
   {
     src: "img/Imagem do WhatsApp de 2025-09-12 à(s) 13.57.03_e9d7c882.jpg",
     caption: "Amor verdadeiro 💕",
-    alt: "Foto do casal"
+    alt: "Foto do casal",
+    type: "image"
   },
   {
     src: "img/Imagem do WhatsApp de 2025-09-12 à(s) 13.57.03_f62fb3b2.jpg",
     caption: "Juntos para sempre 💍",
-    alt: "Foto do casal"
+    alt: "Foto do casal",
+    type: "image"
   },
   {
     src: "img/Imagem do WhatsApp de 2025-09-12 à(s) 13.57.04_19f43125.jpg",
     caption: "Nosso sorriso 💖",
-    alt: "Foto do casal"
+    alt: "Foto do casal",
+    type: "image"
   },
   {
     src: "img/Imagem do WhatsApp de 2025-09-12 à(s) 13.57.04_458c1635.jpg",
     caption: "Momento perfeito ✨",
-    alt: "Foto do casal"
+    alt: "Foto do casal",
+    type: "image"
   },
   {
     src: "img/Imagem do WhatsApp de 2025-09-12 à(s) 13.57.04_daa840e6.jpg",
     caption: "Nossa história de amor 💕",
-    alt: "Foto do casal"
+    alt: "Foto do casal",
+    type: "image"
   },
   {
     src: "img/Imagem do WhatsApp de 2025-09-12 à(s) 13.57.04_dee374b3.jpg",
     caption: "Felicidade pura 💖",
-    alt: "Foto do casal"
+    alt: "Foto do casal",
+    type: "image"
   },
   {
     src: "img/Imagem do WhatsApp de 2025-09-12 à(s) 13.57.05_11bf9a60.jpg",
     caption: "Amor eterno 💍",
-    alt: "Foto do casal"
+    alt: "Foto do casal",
+    type: "image"
   },
   {
     src: "img/Imagem do WhatsApp de 2025-09-12 à(s) 13.57.05_2f7c8514.jpg",
     caption: "Nosso futuro juntos ✨",
-    alt: "Foto do casal"
+    alt: "Foto do casal",
+    type: "image"
+  },
+  {
+    src: "img/Vídeo do WhatsApp de 2025-09-12 à(s) 13.57.05_85550126.mp4",
+    caption: "Nosso momento especial em vídeo 🎬",
+    alt: "Vídeo do casal",
+    type: "video"
   }
 ];
 
@@ -421,18 +434,41 @@ const cardsData = [
     // Limpar galeria existente
     galleryGrid.innerHTML = '';
     
-    // Adicionar todas as fotos do array
-    couplePhotos.forEach(photo => {
+    // Adicionar todas as fotos e vídeos do array
+    couplePhotos.forEach(media => {
       const galleryItem = document.createElement('div');
       galleryItem.className = 'gallery-item';
-      galleryItem.innerHTML = `
-        <img src="${photo.src}" alt="${photo.alt}" />
-        <p class="gallery-caption">${photo.caption}</p>
-      `;
       
-      // Adicionar evento de clique para abrir no lightbox
-      const img = galleryItem.querySelector('img');
-      img.addEventListener('click', () => openLightbox(photo.src));
+      if (media.type === 'video') {
+        galleryItem.innerHTML = `
+          <div class="video-thumbnail" data-src="${media.src}">
+            <video muted>
+              <source src="${media.src}" type="video/mp4">
+            </video>
+            <div class="play-button">▶️</div>
+          </div>
+          <p class="gallery-caption">${media.caption}</p>
+        `;
+        
+        // Adicionar evento de clique para abrir vídeo
+        const videoThumbnail = galleryItem.querySelector('.video-thumbnail');
+        videoThumbnail.addEventListener('click', () => openVideoModal(media.src));
+        
+        // Carregar thumbnail do vídeo
+        const video = galleryItem.querySelector('video');
+        video.addEventListener('loadeddata', () => {
+          video.currentTime = 1; // Pega um frame do vídeo para thumbnail
+        });
+      } else {
+        galleryItem.innerHTML = `
+          <img src="${media.src}" alt="${media.alt}" />
+          <p class="gallery-caption">${media.caption}</p>
+        `;
+        
+        // Adicionar evento de clique para abrir no lightbox
+        const img = galleryItem.querySelector('img');
+        img.addEventListener('click', () => openLightbox(media.src));
+      }
       
       galleryGrid.appendChild(galleryItem);
     });
@@ -443,6 +479,21 @@ const cardsData = [
   function closeCoupleGallery() {
     const galleryModal = document.getElementById('couple-gallery-modal');
     galleryModal.hidden = true;
+  }
+
+  function openVideoModal(videoSrc) {
+    const videoModal = document.getElementById('video-modal');
+    const videoElement = videoModal.querySelector('video');
+    videoElement.src = videoSrc;
+    videoModal.hidden = false;
+  }
+
+  function closeVideoModal() {
+    const videoModal = document.getElementById('video-modal');
+    const videoElement = videoModal.querySelector('video');
+    videoElement.pause();
+    videoElement.src = '';
+    videoModal.hidden = true;
   }
   
   function resetProgress() {
@@ -503,6 +554,13 @@ const cardsData = [
     });
     document.getElementById('add-photo-gallery').addEventListener('click', () => {
       alert('Funcionalidade de adicionar foto será implementada em breve! 💕');
+    });
+
+    // video modal events
+    document.getElementById('close-video').addEventListener('click', closeVideoModal);
+    document.getElementById('close-video-btn').addEventListener('click', closeVideoModal);
+    document.getElementById('video-modal').addEventListener('click', (e) => {
+      if (e.target.id === 'video-modal') closeVideoModal();
     });
   };
   
